@@ -27,11 +27,11 @@ const varsitySchedule: Game[] = [
   { date: '2025-05-17', time: '15:00', opponent: 'Rock Hill (DH)', location: 'Away' }
 ]
 
-// Utility: Converts "YYYY-MM-DD" to "M.D" (e.g., "3.17")
 function formatShortDate(dateStr: string): string {
-  const [month, day] = dateStr.split('-').map(Number)
-  return `${month}.${day}`
-}
+    const [, month, day] = dateStr.split('-').map(Number)
+    return `${month}.${day}`
+  }
+  
 
 export default function VarsityPage() {
   const scheduleContainerRef = useRef<HTMLDivElement>(null)
