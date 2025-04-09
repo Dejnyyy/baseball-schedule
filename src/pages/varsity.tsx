@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef } from 'react'
 import { Game } from '../types'
-
+import Link from 'next/link'
 const varsitySchedule: Game[] = [
   { date: '2025-03-17', time: '17:00', opponent: 'North Adams (S)', location: 'Away' },
   { date: '2025-03-19', time: '17:00', opponent: 'Eastern Pike (S)', location: 'Home' },
@@ -72,12 +72,12 @@ export default function VarsityPage() {
   return (
     <div className="min-h-screen bg-gray-900 text-white relative" style={{ fontFamily: 'Nunito, sans-serif' }}>
       {/* Fixed Top Right Button */}
-      <a
+      <Link
         href="/"
         className="fixed top-4 right-4 bg-green-500 hover:bg-green-600 transition-colors text-white px-4 py-2 rounded-full shadow-lg z-50"
       >
         Go Back
-      </a>
+      </Link>
 
       <div className=" md:flex">
         {/* Sidebar */}
