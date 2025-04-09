@@ -107,7 +107,7 @@ export default function VarsityPage() {
       {/* Main Schedule */}
       <main
         ref={scheduleContainerRef}
-        className="ml-1/4 flex-1 flex flex-col gap-[50vh] overflow-y-auto px-4 py-6"
+        className="ml-1/4 flex-1 flex flex-col gap-[20vh] overflow-y-auto px-4 py-6"
       >
         {enrichedGames.map((game, idx) => {
           const isFirstUpcoming = idx === firstUpcomingIndex

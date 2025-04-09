@@ -17,8 +17,6 @@ const varsitySchedule: Game[] = [
     { date: '2025-05-02', time: '17:00', opponent: 'Athens', location: 'Home' },
     { date: '2025-05-05', time: '17:00', opponent: 'Alexander', location: 'Away' },
   ]
-
-
 // Utility: Converts "YYYY-MM-DD" to "M.D" (e.g., "3.17")
 function formatShortDate(dateStr: string): string {
   const [year, month, day] = dateStr.split('-').map(Number)
@@ -95,7 +93,7 @@ export default function VarsityPage() {
       {/* Main Schedule */}
       <main
         ref={scheduleContainerRef}
-        className="ml-1/4 flex-1 flex flex-col gap-[50vh] overflow-y-auto px-4 py-6"
+        className="ml-1/4 flex-1 flex flex-col gap-[20vh] overflow-y-auto  px-4 py-6"
       >
         {enrichedGames.map((game, idx) => {
           const isFirstUpcoming = idx === firstUpcomingIndex
@@ -105,14 +103,14 @@ export default function VarsityPage() {
               id={`game-${idx}`}
               key={idx}
               ref={isFirstUpcoming ? firstUpcomingRef : null}
-              className="flex flex-col items-center"
+              className="flex flex-col items-center text-right text-md"
             >
               <div className={`text-3xl font-light ${textColorClass}`}>
                 {formatShortDate(game.date)} {game.opponent}{' '}
                 <span>- </span>
                 <span className="underline">{game.location}</span>
                 {isFirstUpcoming && (
-                  <span className="ml-2 text-xl font-medium text-green-400">
+                  <span className="ml-2 text-xl text-green-400">
                     [Upcoming]
                   </span>
                 )}
