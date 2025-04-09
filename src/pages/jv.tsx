@@ -1,89 +1,127 @@
-import React, { useEffect, useState } from 'react'
+// pages/varsity.tsx
+
+import React, { useEffect, useMemo, useRef } from 'react'
 import { Game } from '../types'
-import { getNextGame } from '../utils/GetNextGame'
-import { formatCountdown } from '../utils/FormatCountdown'
 
-const jvSchedule: Game[] = [
-  {
-    date: '2025-03-18',
-    time: '17:00',
-    opponent: 'JV Opponent #1',
-    location: 'Home'
-  },
-  {
-    date: '2025-03-20',
-    time: '17:00',
-    opponent: 'JV Opponent #2',
-    location: 'Away'
-  },
-  {
-    date: '2025-03-25',
-    time: '17:00',
-    opponent: 'JV Opponent #3',
-    location: 'Home'
-  }
-  // Add as many JV games as you want...
-]
+const varsitySchedule: Game[] = [
+    { date: '2025-04-02', time: '17:00', opponent: 'Wellston', location: 'Home' },
+    { date: '2025-04-04', time: '17:00', opponent: 'Vinton County', location: 'Away' },
+    { date: '2025-04-07', time: '17:00', opponent: 'Meigs', location: 'Home' },
+    { date: '2025-04-09', time: '17:00', opponent: 'Nelsonville York', location: 'Away' },
+    { date: '2025-04-14', time: '17:00', opponent: 'Athens', location: 'Away' },
+    { date: '2025-04-16', time: '17:00', opponent: 'Alexander', location: 'Home' },
+    { date: '2025-04-21', time: '17:00', opponent: 'Wellston', location: 'Away' },
+    { date: '2025-04-23', time: '17:00', opponent: 'Vinton County', location: 'Home' },
+    { date: '2025-04-25', time: '17:00', opponent: 'Meigs', location: 'Away' },
+    { date: '2025-04-28', time: '17:00', opponent: 'Nelsonville York', location: 'Home' },
+    { date: '2025-05-02', time: '17:00', opponent: 'Athens', location: 'Home' },
+    { date: '2025-05-05', time: '17:00', opponent: 'Alexander', location: 'Away' },
+  ]
 
-export default function JVPage() {
-  const [countdown, setCountdown] = useState('')
-  
-  // Find the next game to display in the countdown
-  const nextGame = getNextGame(jvSchedule)
 
+// Utility: Converts "YYYY-MM-DD" to "M.D" (e.g., "3.17")
+function formatShortDate(dateStr: string): string {
+  const [year, month, day] = dateStr.split('-').map(Number)
+  return `${month}.${day}`
+}
+
+export default function VarsityPage() {
+  const scheduleContainerRef = useRef<HTMLDivElement>(null)
+  const firstUpcomingRef = useRef<HTMLDivElement>(null)
+  const now = new Date()
+
+  // Enrich each game with its Date object and sort chronologically.
+  const enrichedGames = useMemo(() => {
+    return varsitySchedule
+      .map(game => {
+        const [year, month, day] = game.date.split('-').map(Number)
+        const [hour, minute] = game.time.split(':').map(Number)
+        return { ...game, gameDate: new Date(year, month - 1, day, hour, minute) }
+      })
+      .sort((a, b) => a.gameDate.getTime() - b.gameDate.getTime())
+  }, [])
+
+  // Identify the index of the first upcoming game.
+  const firstUpcomingIndex = useMemo(() => {
+    return enrichedGames.findIndex(game => game.gameDate.getTime() >= now.getTime())
+  }, [enrichedGames, now])
+
+  // On mount, scroll to the first upcoming game.
   useEffect(() => {
-    if (!nextGame) return
+    if (firstUpcomingRef.current) {
+      firstUpcomingRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, [firstUpcomingIndex])
 
-    // Update the countdown every second
-    const interval = setInterval(() => {
-      setCountdown(formatCountdown(nextGame))
-    }, 1000)
-
-    return () => clearInterval(interval)
-  }, [nextGame])
+  // Scroll to a specific game when clicked in the sidebar.
+  const handleSidebarClick = (index: number) => {
+    const element = document.getElementById(`game-${index}`)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }
 
   return (
-    <div className="min-h-screen p-4 bg-gray-100">
-      <h1 className="text-3xl font-bold mb-6 text-center">JV Baseball Schedule</h1>
-      {nextGame ? (
-        <div className="max-w-xl mx-auto p-4 bg-white rounded shadow mb-8 text-center">
-          <h2 className="text-xl font-semibold mb-2">Next Game Countdown</h2>
-          <p className="text-lg font-mono">{countdown}</p>
-          <p className="text-sm mt-2">
-            vs {nextGame.opponent} on {nextGame.date} at {nextGame.time} ({nextGame.location})
-          </p>
-        </div>
-      ) : (
-        <div className="text-center mb-8">
-          <p>No upcoming games scheduled.</p>
-        </div>
-      )}
+    <div className="min-h-screen flex bg-gray-900 text-white">
+      {/* Fixed, Scrollable Sidebar */}
+      <a
+        href="/"
+        className="fixed top-4 right-4 bg-green-500 hover:bg-green-600 transition-colors text-white px-4 py-2 rounded-full shadow-lg z-50"
+      >
+        Go Back
+      </a>
+      <aside className="fixed top-0 left-0 h-screen w-1/4 bg-gray-800 p-4 border-r border-gray-700 overflow-y-auto">
+        <h2 className="text-2xl font-bold mb-4">JV Games</h2>
+        <ul>
+          {enrichedGames.map((game, idx) => {
+            const isUpcoming = idx === firstUpcomingIndex
+            const textColorClass = isUpcoming ? 'text-white' : 'text-gray-500'
+            return (
+              <li
+                key={idx}
+                className={`cursor-pointer hover:text-green-400 mb-2 ${textColorClass}`}
+                onClick={() => handleSidebarClick(idx)}
+              >
+                {formatShortDate(game.date)} {game.opponent}{' '}
+                <span>- </span>
+                <span className="underline">{game.location}</span>
+                {isUpcoming && <span className="ml-2 text-green-400 text-sm">[Upcoming]</span>}
+              </li>
+            )
+          })}
+        </ul>
+      </aside>
 
-      <div className="max-w-xl mx-auto bg-white p-4 rounded shadow">
-        <h2 className="text-xl font-semibold mb-4 text-center">Full JV Schedule</h2>
-        <div className="overflow-y-auto max-h-[60vh]">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr>
-                <th className="border-b p-2">Date</th>
-                <th className="border-b p-2">Time</th>
-                <th className="border-b p-2">Opponent</th>
-                <th className="border-b p-2">Location</th>
-              </tr>
-            </thead>
-            <tbody>
-              {jvSchedule.map((game, idx) => (
-                <tr key={idx} className="hover:bg-gray-50">
-                  <td className="p-2 border-b">{game.date}</td>
-                  <td className="p-2 border-b">{game.time}</td>
-                  <td className="p-2 border-b">{game.opponent}</td>
-                  <td className="p-2 border-b">{game.location}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+      {/* Main Schedule */}
+      <main
+        ref={scheduleContainerRef}
+        className="ml-1/4 flex-1 flex flex-col gap-[50vh] overflow-y-auto px-4 py-6"
+      >
+        {enrichedGames.map((game, idx) => {
+          const isFirstUpcoming = idx === firstUpcomingIndex
+          const textColorClass = isFirstUpcoming ? 'text-white' : 'hover:text-white transition-all duration-300 cursor-pointer text-gray-500'
+          return (
+            <div
+              id={`game-${idx}`}
+              key={idx}
+              ref={isFirstUpcoming ? firstUpcomingRef : null}
+              className="flex flex-col items-center"
+            >
+              <div className={`text-3xl font-light ${textColorClass}`}>
+                {formatShortDate(game.date)} {game.opponent}{' '}
+                <span>- </span>
+                <span className="underline">{game.location}</span>
+                {isFirstUpcoming && (
+                  <span className="ml-2 text-xl font-medium text-green-400">
+                    [Upcoming]
+                  </span>
+                )}
+              </div>
+              <div className="mt-4 w-full max-w-md border-t border-gray-700" />
+            </div>
+          )
+        })}
+      </main>
     </div>
   )
 }

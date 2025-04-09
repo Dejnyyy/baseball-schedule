@@ -73,9 +73,17 @@ export default function VarsityPage() {
 
   return (
     <div className="min-h-screen flex bg-gray-900 text-white">
+      {/* Fixed Top Right Button */}
+      <a
+        href="/"
+        className="fixed top-4 right-4 bg-green-500 hover:bg-green-600 transition-colors text-white px-4 py-2 rounded-full shadow-lg z-50"
+      >
+        Go Back
+      </a>
+
       {/* Fixed, Scrollable Sidebar */}
       <aside className="fixed top-0 left-0 h-screen w-1/4 bg-gray-800 p-4 border-r border-gray-700 overflow-y-auto">
-        <h2 className="text-2xl font-bold mb-4">Games</h2>
+        <h2 className="text-2xl font-bold mb-4">Varsity Games</h2>
         <ul>
           {enrichedGames.map((game, idx) => {
             const isUpcoming = idx === firstUpcomingIndex
@@ -103,7 +111,9 @@ export default function VarsityPage() {
       >
         {enrichedGames.map((game, idx) => {
           const isFirstUpcoming = idx === firstUpcomingIndex
-          const textColorClass = isFirstUpcoming ? 'text-white' : 'hover:text-white transition-all duration-300 cursor-pointer text-gray-500'
+          const textColorClass = isFirstUpcoming
+            ? 'text-white'
+            : 'hover:text-white transition-all duration-300 cursor-pointer text-gray-500'
           return (
             <div
               id={`game-${idx}`}
