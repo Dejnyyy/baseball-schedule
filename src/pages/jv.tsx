@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef } from 'react'
 import { Game } from '../types'
 
-const varsitySchedule: Game[] = [
+const jvSchedule: Game[] = [
   { date: '2025-04-02', time: '17:00', opponent: 'Wellston', location: 'Home' },
   { date: '2025-04-04', time: '17:00', opponent: 'Vinton County', location: 'Away' },
   { date: '2025-04-07', time: '17:00', opponent: 'Meigs', location: 'Home' },
@@ -29,7 +29,7 @@ export default function VarsityPage() {
 
   // Enrich and sort games chronologically.
   const enrichedGames = useMemo(() => {
-    return varsitySchedule
+    return jvSchedule
       .map(game => {
         const [year, month, day] = game.date.split('-').map(Number)
         const [hour, minute] = game.time.split(':').map(Number)
@@ -70,7 +70,7 @@ export default function VarsityPage() {
 
       <div className="md:flex">
         {/* Sidebar */}
-        <aside className="w-full md:w-1/4 md:fixed top-0 left-0 h-auto md:h-screen bg-gray-800 p-4 border-b md:border-r border-gray-700 overflow-y-auto">
+        <aside className=" hidden md:flex md:flex-col md:w-1/4 md:fixed top-0 left-0 h-auto md:h-screen bg-gray-800 p-4 border-b md:border-r border-gray-700 overflow-y-auto">
           <h2 className="text-2xl font-bold mb-4">JV Games</h2>
           <ul>
             {enrichedGames.map((game, idx) => {

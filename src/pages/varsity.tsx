@@ -1,5 +1,3 @@
-// pages/varsity.tsx
-
 import React, { useEffect, useMemo, useRef } from 'react'
 import { Game } from '../types'
 
@@ -40,7 +38,7 @@ export default function VarsityPage() {
   const firstUpcomingRef = useRef<HTMLDivElement>(null)
   const now = new Date()
 
-  // Enrich each game with its Date object and sort chronologically.
+  // Enrich each game with a Date object and sort chronologically.
   const enrichedGames = useMemo(() => {
     return varsitySchedule
       .map(game => {
@@ -72,7 +70,7 @@ export default function VarsityPage() {
   }
 
   return (
-    <div className="min-h-screen flex bg-gray-900 text-white">
+    <div className="min-h-screen bg-gray-900 text-white relative" style={{ fontFamily: 'Nunito, sans-serif' }}>
       {/* Fixed Top Right Button */}
       <a
         href="/"
@@ -81,61 +79,61 @@ export default function VarsityPage() {
         Go Back
       </a>
 
-      {/* Fixed, Scrollable Sidebar */}
-      <aside className="fixed top-0 left-0 h-screen w-1/4 bg-gray-800 p-4 border-r border-gray-700 overflow-y-auto">
-        <h2 className="text-2xl font-bold mb-4">Varsity Games</h2>
-        <ul>
+      <div className=" md:flex">
+        {/* Sidebar */}
+        <aside className="hidden md:flex md:flex-col md:w-1/4 md:fixed md:top-0 md:left-0 md:h-screen bg-gray-800 p-4 border-b md:border-r border-gray-700 overflow-y-auto">
+          <h2 className="text-2xl font-bold mb-4">Varsity Games</h2>
+          <ul>
+            {enrichedGames.map((game, idx) => {
+              const isUpcoming = idx === firstUpcomingIndex
+              const textColorClass = isUpcoming ? 'text-white' : 'text-gray-500'
+              return (
+                <li
+                  key={idx}
+                  className={`cursor-pointer hover:text-green-400 mb-2 ${textColorClass}`}
+                  onClick={() => handleSidebarClick(idx)}
+                >
+                  {formatShortDate(game.date)} {game.opponent}{' '}
+                  <span>- </span>
+                  <span className="underline">{game.location}</span>
+                  {isUpcoming && <span className="ml-2 text-green-400 text-sm">[Upcoming]</span>}
+                </li>
+              )
+            })}
+          </ul>
+        </aside>
+
+        {/* Main Schedule */}
+        <main
+          ref={scheduleContainerRef}
+          className="mt-4 md:mt-0 md:ml-1/4 flex-1 flex flex-col gap-10 md:gap-[20vh] overflow-y-auto px-4 py-6"
+        >
           {enrichedGames.map((game, idx) => {
-            const isUpcoming = idx === firstUpcomingIndex
-            const textColorClass = isUpcoming ? 'text-white' : 'text-gray-500'
+            const isFirstUpcoming = idx === firstUpcomingIndex
+            const textColorClass = isFirstUpcoming
+              ? 'text-white'
+              : 'hover:text-white transition-all duration-300 cursor-pointer text-gray-500'
             return (
-              <li
+              <div
+                id={`game-${idx}`}
                 key={idx}
-                className={`cursor-pointer hover:text-green-400 mb-2 ${textColorClass}`}
-                onClick={() => handleSidebarClick(idx)}
+                ref={isFirstUpcoming ? firstUpcomingRef : null}
+                className="flex flex-col items-center text-right"
               >
-                {formatShortDate(game.date)} {game.opponent}{' '}
-                <span>- </span>
-                <span className="underline">{game.location}</span>
-                {isUpcoming && <span className="ml-2 text-green-400 text-sm">[Upcoming]</span>}
-              </li>
+                <div className={`text-3xl font-light ${textColorClass}`}>
+                  {formatShortDate(game.date)} {game.opponent}{' '}
+                  <span>- </span>
+                  <span className="underline">{game.location}</span>
+                  {isFirstUpcoming && (
+                    <span className="ml-2 text-xl text-green-400">[Upcoming]</span>
+                  )}
+                </div>
+                <div className="mt-4 w-full max-w-md border-t border-gray-700" />
+              </div>
             )
           })}
-        </ul>
-      </aside>
-
-      {/* Main Schedule */}
-      <main
-        ref={scheduleContainerRef}
-        className="ml-1/4 flex-1 flex flex-col gap-[20vh] overflow-y-auto px-4 py-6"
-      >
-        {enrichedGames.map((game, idx) => {
-          const isFirstUpcoming = idx === firstUpcomingIndex
-          const textColorClass = isFirstUpcoming
-            ? 'text-white'
-            : 'hover:text-white transition-all duration-300 cursor-pointer text-gray-500'
-          return (
-            <div
-              id={`game-${idx}`}
-              key={idx}
-              ref={isFirstUpcoming ? firstUpcomingRef : null}
-              className="flex flex-col items-center"
-            >
-              <div className={`text-3xl font-light ${textColorClass}`}>
-                {formatShortDate(game.date)} {game.opponent}{' '}
-                <span>- </span>
-                <span className="underline">{game.location}</span>
-                {isFirstUpcoming && (
-                  <span className="ml-2 text-xl font-medium text-green-400">
-                    [Upcoming]
-                  </span>
-                )}
-              </div>
-              <div className="mt-4 w-full max-w-md border-t border-gray-700" />
-            </div>
-          )
-        })}
-      </main>
+        </main>
+      </div>
     </div>
   )
 }

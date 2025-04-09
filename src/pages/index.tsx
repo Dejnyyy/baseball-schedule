@@ -13,7 +13,7 @@ export default function Home() {
         className="flex items-center justify-center w-1/2 h-screen rounded-l-none bg-gray-800 text-white transition-all hover:bg-gray-900 rounded-xl"
       >
         <div className="text-center">
-          <h1 className="text-4xl font-bold mb-4">Junior Varsity</h1>
+          <h1 className="text-4xl font-bold mb-4">JV</h1>
           <p className="text-2xl">JV Schedule</p>
         </div>
       </Link>
