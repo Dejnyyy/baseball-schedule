@@ -2,18 +2,18 @@ import React, { useEffect, useMemo, useRef } from 'react'
 import { Game } from '../types'
 import Link from 'next/link'
 const jvSchedule: Game[] = [
-  { date: '2025-04-02', time: '17:00', opponent: 'Wellston', location: 'Home' },
-  { date: '2025-04-04', time: '17:00', opponent: 'Vinton County', location: 'Away' },
-  { date: '2025-04-07', time: '17:00', opponent: 'Meigs', location: 'Home' },
-  { date: '2025-04-09', time: '17:00', opponent: 'Nelsonville York', location: 'Away' },
-  { date: '2025-04-14', time: '17:00', opponent: 'Athens', location: 'Away' },
-  { date: '2025-04-16', time: '17:00', opponent: 'Alexander', location: 'Home' },
-  { date: '2025-04-21', time: '17:00', opponent: 'Wellston', location: 'Away' },
-  { date: '2025-04-23', time: '17:00', opponent: 'Vinton County', location: 'Home' },
-  { date: '2025-04-25', time: '17:00', opponent: 'Meigs', location: 'Away' },
-  { date: '2025-04-28', time: '17:00', opponent: 'Nelsonville York', location: 'Home' },
-  { date: '2025-05-02', time: '17:00', opponent: 'Athens', location: 'Home' },
-  { date: '2025-05-05', time: '17:00', opponent: 'Alexander', location: 'Away' }
+  { date: '04-02', time: '17:00', opponent: 'Wellston', location: 'Home' },
+  { date: '04-04', time: '17:00', opponent: 'Vinton County', location: 'Away' },
+  { date: '04-07', time: '17:00', opponent: 'Meigs', location: 'Home' },
+  { date: '04-09', time: '17:00', opponent: 'Nelsonville York', location: 'Away' },
+  { date: '04-14', time: '17:00', opponent: 'Athens', location: 'Away' },
+  { date: '04-16', time: '17:00', opponent: 'Alexander', location: 'Home' },
+  { date: '04-21', time: '17:00', opponent: 'Wellston', location: 'Away' },
+  { date: '04-23', time: '17:00', opponent: 'Vinton County', location: 'Home' },
+  { date: '04-25', time: '17:00', opponent: 'Meigs', location: 'Away' },
+  { date: '04-28', time: '17:00', opponent: 'Nelsonville York', location: 'Home' },
+  { date: '05-02', time: '17:00', opponent: 'Athens', location: 'Home' },
+  { date: '05-05', time: '17:00', opponent: 'Alexander', location: 'Away' }
 ]
 
 // Utility: Converts "YYYY-MM-DD" to "M.D" (e.g., "3.17")
