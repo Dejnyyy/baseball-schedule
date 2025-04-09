@@ -29,7 +29,7 @@ const varsitySchedule: Game[] = [
 
 // Utility: Converts "YYYY-MM-DD" to "M.D" (e.g., "3.17")
 function formatShortDate(dateStr: string): string {
-  const [year, month, day] = dateStr.split('-').map(Number)
+  const [month, day] = dateStr.split('-').map(Number)
   return `${month}.${day}`
 }
 
