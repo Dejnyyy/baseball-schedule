@@ -31,9 +31,9 @@ export default function VarsityPage() {
   const enrichedGames = useMemo(() => {
     return jvSchedule
       .map(game => {
-        const [year, month, day] = game.date.split('-').map(Number)
+        const [month, day] = game.date.split('-').map(Number)
         const [hour, minute] = game.time.split(':').map(Number)
-        return { ...game, gameDate: new Date(year, month - 1, day, hour, minute) }
+        return { ...game, gameDate: new Date(month - 1, day, hour, minute) }
       })
       .sort((a, b) => a.gameDate.getTime() - b.gameDate.getTime())
   }, [])

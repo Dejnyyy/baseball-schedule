@@ -6,9 +6,9 @@ export function getNextGame(schedule: Game[]): Game | null {
   // Convert each game to a Date object and filter for future games
   const futureGames = schedule
     .map(game => {
-      const [year, month, day] = game.date.split('-').map(Number)
+      const [ month, day] = game.date.split('-').map(Number)
       const [hour, minute] = game.time.split(':').map(Number)
-      const dateObj = new Date(year, month - 1, day, hour, minute)
+      const dateObj = new Date(month - 1, day, hour, minute)
       return { ...game, dateObj }
     })
     .filter(({ dateObj }) => dateObj.getTime() > now.getTime())
