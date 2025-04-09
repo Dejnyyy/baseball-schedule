@@ -1,9 +1,9 @@
 import { Game } from './../types'
 
 export function formatCountdown(game: Game): string {
-  const [ month, day] = game.date.split('-').map(Number)
+  const [year, month, day] = game.date.split('-').map(Number)
   const [hour, minute] = game.time.split(':').map(Number)
-  const gameDate = new Date(month - 1, day, hour, minute)
+  const gameDate = new Date(year, month - 1, day, hour, minute)
   const now = new Date()
 
   const totalSeconds = Math.max(0, Math.floor((gameDate.getTime() - now.getTime()) / 1000))

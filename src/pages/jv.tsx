@@ -2,25 +2,26 @@ import React, { useEffect, useMemo, useRef } from 'react'
 import { Game } from '../types'
 import Link from 'next/link'
 const jvSchedule: Game[] = [
-  { date: '04-02', time: '17:00', opponent: 'Wellston', location: 'Home' },
-  { date: '04-04', time: '17:00', opponent: 'Vinton County', location: 'Away' },
-  { date: '04-07', time: '17:00', opponent: 'Meigs', location: 'Home' },
-  { date: '04-09', time: '17:00', opponent: 'Nelsonville York', location: 'Away' },
-  { date: '04-14', time: '17:00', opponent: 'Athens', location: 'Away' },
-  { date: '04-16', time: '17:00', opponent: 'Alexander', location: 'Home' },
-  { date: '04-21', time: '17:00', opponent: 'Wellston', location: 'Away' },
-  { date: '04-23', time: '17:00', opponent: 'Vinton County', location: 'Home' },
-  { date: '04-25', time: '17:00', opponent: 'Meigs', location: 'Away' },
-  { date: '04-28', time: '17:00', opponent: 'Nelsonville York', location: 'Home' },
-  { date: '05-02', time: '17:00', opponent: 'Athens', location: 'Home' },
-  { date: '05-05', time: '17:00', opponent: 'Alexander', location: 'Away' }
+  { date: '2025-04-02', time: '17:00', opponent: 'Wellston', location: 'Home' },
+  { date: '2025-04-04', time: '17:00', opponent: 'Vinton County', location: 'Away' },
+  { date: '2025-04-07', time: '17:00', opponent: 'Meigs', location: 'Home' },
+  { date: '2025-04-09', time: '17:00', opponent: 'Nelsonville York', location: 'Away' },
+  { date: '2025-04-14', time: '17:00', opponent: 'Athens', location: 'Away' },
+  { date: '2025-04-16', time: '17:00', opponent: 'Alexander', location: 'Home' },
+  { date: '2025-04-21', time: '17:00', opponent: 'Wellston', location: 'Away' },
+  { date: '2025-04-23', time: '17:00', opponent: 'Vinton County', location: 'Home' },
+  { date: '2025-04-25', time: '17:00', opponent: 'Meigs', location: 'Away' },
+  { date: '2025-04-28', time: '17:00', opponent: 'Nelsonville York', location: 'Home' },
+  { date: '2025-05-02', time: '17:00', opponent: 'Athens', location: 'Home' },
+  { date: '2025-05-05', time: '17:00', opponent: 'Alexander', location: 'Away' }
 ]
 
 // Utility: Converts "YYYY-MM-DD" to "M.D" (e.g., "3.17")
 function formatShortDate(dateStr: string): string {
-  const [month, day] = dateStr.split('-').map(Number)
-  return `${month}.${day}`
-}
+    const [, month, day] = dateStr.split('-').map(Number)
+    return `${month}.${day}`
+  }
+  
 
 export default function VarsityPage() {
   const scheduleContainerRef = useRef<HTMLDivElement>(null)
@@ -31,9 +32,9 @@ export default function VarsityPage() {
   const enrichedGames = useMemo(() => {
     return jvSchedule
       .map(game => {
-        const [month, day] = game.date.split('-').map(Number)
+        const [year, month, day] = game.date.split('-').map(Number)
         const [hour, minute] = game.time.split(':').map(Number)
-        return { ...game, gameDate: new Date(month - 1, day, hour, minute) }
+        return { ...game, gameDate: new Date(year, month - 1, day, hour, minute) }
       })
       .sort((a, b) => a.gameDate.getTime() - b.gameDate.getTime())
   }, [])
