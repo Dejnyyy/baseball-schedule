@@ -28,7 +28,7 @@ export default function Home() {
           <p className="text-2xl">Varsity Schedule</p>
         </div>
       </Link>
-      <div className='absolute w-full mx-auto bottom-0 font-bold  text-2xl text-center text-green-500 z-20'><Link href={"https://dejny.eu"} target='_blank'><p>Dejny.eu</p></Link></div>
+      <div className='absolute right-4 bottom-4 font-bold  text-2xl text-center text-green-500 z-20'><Link href={"https://dejny.eu"} target='_blank'><p>Dejny.eu</p></Link></div>
 
     </div>
   )
