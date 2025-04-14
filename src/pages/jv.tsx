@@ -23,6 +23,11 @@ function formatShortDate(dateStr: string): string {
   }
   
 
+// New utility: Returns full day name (e.g., "Monday")
+function formatWeekDay(date: Date): string {
+  // Change 'long' to 'short' if you prefer abbreviated days (e.g., Mon, Tue).
+  return date.toLocaleDateString('en-US', { weekday: 'short' })
+}
 export default function VarsityPage() {
   const scheduleContainerRef = useRef<HTMLDivElement>(null)
   const firstUpcomingRef = useRef<HTMLDivElement>(null)
@@ -71,7 +76,7 @@ export default function VarsityPage() {
 
       <div className="md:flex">
         {/* Sidebar */}
-        <aside className=" hidden md:flex md:flex-col md:w-1/4 md:fixed top-0 left-0 h-auto md:h-screen bg-gray-800 p-4 border-b md:border-r border-gray-700 overflow-y-auto">
+        <aside className="hidden md:flex md:flex-col md:w-1/4 md:fixed top-0 left-0 h-auto md:h-screen bg-gray-800 p-4 border-b md:border-r border-gray-700 overflow-y-auto">
           <h2 className="text-2xl font-bold mb-4">JV Games</h2>
           <ul>
             {enrichedGames.map((game, idx) => {
@@ -83,6 +88,8 @@ export default function VarsityPage() {
                   className={`cursor-pointer hover:text-green-400 mb-2 ${textColorClass}`}
                   onClick={() => handleSidebarClick(idx)}
                 >
+                  {/* Display day name followed by the date */}
+                  <span className="mr-1">{formatWeekDay(game.gameDate)}</span>
                   {formatShortDate(game.date)} {game.opponent}{' '}
                   <span>- </span>
                   <span className="underline">{game.location}</span>
@@ -111,6 +118,8 @@ export default function VarsityPage() {
                 className="flex flex-col items-center text-right text-md"
               >
                 <div className={`text-3xl font-light ${textColorClass}`}>
+                  {/* Display day name followed by the date */}
+                  <span className="mr-2">{formatWeekDay(game.gameDate)}</span>
                   {formatShortDate(game.date)} {game.opponent}{' '}
                   <span>- </span>
                   <span className="underline">{game.location}</span>
