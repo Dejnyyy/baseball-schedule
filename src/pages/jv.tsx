@@ -8,6 +8,7 @@ const jvSchedule: Game[] = [
   { date: '2025-04-09', time: '17:00', opponent: 'Nelsonville York', location: 'Away' },
   { date: '2025-04-14', time: '17:00', opponent: 'Athens', location: 'Away' },
   { date: '2025-04-16', time: '17:00', opponent: 'Alexander', location: 'Home' },
+  { date: '2025-04-17', time: '17:00', opponent: 'Meigs', location: 'Home' },
   { date: '2025-04-21', time: '17:00', opponent: 'Wellston', location: 'Away' },
   { date: '2025-04-23', time: '17:00', opponent: 'Vinton County', location: 'Home' },
   { date: '2025-04-25', time: '17:00', opponent: 'Meigs', location: 'Away' },
