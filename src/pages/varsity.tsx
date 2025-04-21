@@ -17,6 +17,7 @@ const varsitySchedule: Game[] = [
   { date: '2025-04-18', time: '17:00', opponent: 'Federal Hocking', location: 'Home' },
   { date: '2025-04-21', time: '17:00', opponent: 'Wellston', location: 'Home' },
   { date: '2025-04-23', time: '17:00', opponent: 'Vinton County', location: 'Away' },
+  { date: '2025-04-24', time: '17:00', opponent: 'Athens', location: 'Home' },
   { date: '2025-04-25', time: '17:00', opponent: 'Meigs', location: 'Home' },
   { date: '2025-04-28', time: '17:00', opponent: 'Nelsonville York', location: 'Away' },
   { date: '2025-04-29', time: '17:00', opponent: 'Hunington Ross', location: 'Home' },
