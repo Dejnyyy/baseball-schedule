@@ -9,7 +9,7 @@ const jvSchedule: Game[] = [
   { date: '2025-04-14', time: '17:00', opponent: 'Athens', location: 'Away' },
   { date: '2025-04-16', time: '17:00', opponent: 'Alexander', location: 'Home' ,result: 'L'},
   { date: '2025-04-17', time: '17:00', opponent: 'Meigs', location: 'Home' ,result: 'L'},
-  { date: '2025-04-21', time: '17:00', opponent: 'Wellston', location: 'Away' ,result: 'L'},
+  { date: '2025-04-21', time: '17:00', opponent: 'Wellston', location: 'Away'},
   { date: '2025-04-23', time: '17:00', opponent: 'Vinton County', location: 'Home' },
   { date: '2025-04-24', time: '17:00', opponent: 'Athens', location: 'Away' },
   { date: '2025-04-25', time: '17:00', opponent: 'Meigs', location: 'Away' },
@@ -95,11 +95,7 @@ export default function VarsityPage() {
                   {formatShortDate(game.date)} {game.opponent}{' '}
                   <span>- </span>
                   <span className="underline">{game.location}</span>
-                  {game.result && (
-  <span className={`ml-3 text-xl font-semibold ${game.result === 'W' ? 'text-green-400' : 'text-red-400'}`}>
-    {game.result}
-  </span>
-)}
+              
                   {isUpcoming && <span className="ml-2 text-green-400 text-sm">[Upcoming]</span>}
                 </li>
               )
@@ -130,6 +126,11 @@ export default function VarsityPage() {
                   {formatShortDate(game.date)} {game.opponent}{' '}
                   <span>- </span>
                   <span className="underline">{game.location}</span>
+                  {game.result && (
+  <span className={`ml-3 text-xl font-semibold ${game.result === 'W' ? 'text-green-400' : 'text-red-400'}`}>
+    {game.result}
+  </span>
+)}
                   {isFirstUpcoming && (
                     <span className="ml-2 text-xl text-green-400">[Upcoming]</span>
                   )}
