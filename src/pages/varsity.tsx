@@ -2,16 +2,15 @@ import React, { useEffect, useMemo, useRef } from 'react'
 import { Game } from '../types'
 import Link from 'next/link'
 const varsitySchedule: Game[] = [
-  { date: '2025-03-17', time: '17:00', opponent: 'North Adams (S)', location: 'Away' },
-  { date: '2025-03-19', time: '17:00', opponent: 'Eastern Pike (S)', location: 'Home' },
+  { date: '2025-03-17', time: '17:00', opponent: 'North Adams (S)', location: 'Away',result: 'L'  },
+  { date: '2025-03-19', time: '17:00', opponent: 'Eastern Pike (S)', location: 'Home' ,result: 'W' },
   { date: '2025-03-24', time: '17:00', opponent: 'Miller (S)', location: 'Away',result: 'W' },
   { date: '2025-03-26', time: '17:00', opponent: 'Southeastern Ross', location: 'Home',result: 'L'  },
   { date: '2025-03-31', time: '17:00', opponent: 'Wellston', location: 'Away',result: 'L'  },
   { date: '2025-04-04', time: '17:00', opponent: 'Vinton County', location: 'Home'  },
-  { date: '2025-04-07', time: '17:00', opponent: 'Meigs', location: 'Away' },
-  { date: '2025-04-09', time: '17:00', opponent: 'Nelsonville York', location: 'Home',result: 'L' },
+  { date: '2025-04-09', time: '17:00', opponent: 'Nelsonville York', location: 'Home',result: 'W' },
   { date: '2025-04-10', time: '17:00', opponent: 'Miller', location: 'Home' },
-  { date: '2025-04-14', time: '17:00', opponent: 'Athens', location: 'Home' ,result: 'L'},
+  { date: '2025-04-14', time: '17:00', opponent: 'Athens', location: 'Home'},
   { date: '2025-04-16', time: '17:00', opponent: 'Alexander', location: 'Away',result: 'L' },
   { date: '2025-04-17', time: '17:00', opponent: 'Meigs', location: 'Away',result: 'L' },
   { date: '2025-04-18', time: '17:00', opponent: 'Federal Hocking', location: 'Home' ,result: 'W'},
