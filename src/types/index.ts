@@ -3,5 +3,6 @@ export interface Game {
     time: string    
     opponent: string
     location: string
+    result?: 'W' | 'L'
   }
   
