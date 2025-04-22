@@ -4,5 +4,6 @@ export interface Game {
     opponent: string
     location: string
     result?: 'W' | 'L'
+    score?: string
   }
   
