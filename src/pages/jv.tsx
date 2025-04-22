@@ -128,7 +128,7 @@ export default function VarsityPage() {
                   <span className="underline">{game.location}</span>
                   {game.result && (
   <span className={`ml-3 text-xl font-semibold ${game.result === 'W' ? 'text-green-400' : 'text-red-400'}`}>
-    {game.result}{game.score}
+    {game.result}{" "}{game.score}
   </span>
 )}
                   {isFirstUpcoming && (
