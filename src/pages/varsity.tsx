@@ -15,7 +15,7 @@ const varsitySchedule: Game[] = [
   { date: '2025-04-17', time: '17:00', opponent: 'Meigs', location: 'Away',result: 'L' , score:"13:1"},
   { date: '2025-04-18', time: '17:00', opponent: 'Federal Hocking', location: 'Home' ,result: 'W', score:"9:3"},
   { date: '2025-04-21', time: '17:00', opponent: 'Wellston', location: 'Home', result:'L', score:"11:1" },
-  { date: '2025-04-23', time: '17:00', opponent: 'Vinton County', location: 'Away' },
+  { date: '2025-04-23', time: '17:00', opponent: 'Vinton County', location: 'Away',result: 'L',score:"13:8" },
   { date: '2025-04-25', time: '17:00', opponent: 'Meigs', location: 'Home' },
   { date: '2025-04-28', time: '17:00', opponent: 'Nelsonville York', location: 'Away' },
   { date: '2025-04-29', time: '17:00', opponent: 'Hunington Ross', location: 'Home' },
@@ -135,10 +135,10 @@ export default function VarsityPage() {
                   <span>- </span>
                   <span className="underline">{game.location}</span>
                   {game.result && (
-  <span className={`ml-3 text-xl font-semibold ${game.result === 'W' ? 'text-green-400' : 'text-red-400'}`}>
-   {game.result}{" "}{game.score}
-  </span>
-)}
+                    <span className={`ml-3 text-xl font-semibold ${game.result === 'W' ? 'text-green-400' : 'text-red-400'}`}>
+                    {game.result}{" "}{game.score}
+                    </span>
+                  )}
                   {isFirstUpcoming && (
                     <span className="ml-2 text-xl text-green-400">[Upcoming]</span>
                   )}
