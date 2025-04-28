@@ -11,9 +11,11 @@ const jvSchedule: Game[] = [
   { date: '2025-04-17', time: '17:00', opponent: 'Meigs', location: 'Home' ,result: 'L',score:"21:9"},
   { date: '2025-04-22', time: '17:00', opponent: 'Wellston', location: 'Away',result: 'L',score:"13:3"},
   { date: '2025-04-23', time: '17:00', opponent: 'Vinton County', location: 'Home' ,result: 'L',score:"8:1"},
-  { date: '2025-04-24', time: '17:00', opponent: 'Athens', location: 'Away' },
-  { date: '2025-04-25', time: '17:00', opponent: 'Meigs', location: 'Away' },
+  //{ date: '2025-04-24', time: '17:00', opponent: 'Athens', location: 'Away' },
+  //{ date: '2025-04-25', time: '17:00', opponent: 'Meigs', location: 'Away' },
   { date: '2025-04-28', time: '17:00', opponent: 'Nelsonville York', location: 'Home' },
+  { date: '2025-04-30', time: '17:00', opponent: 'Federal Hocking', location: 'Home' },
+  { date: '2025-05-01', time: '17:00', opponent: 'Athens', location: 'Away' },
   { date: '2025-05-02', time: '17:00', opponent: 'Athens', location: 'Home' },
   { date: '2025-05-05', time: '17:00', opponent: 'Alexander', location: 'Away' }
 ]
